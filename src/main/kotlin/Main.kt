@@ -1,4 +1,4 @@
-package org.example
+package com.berlin
 
 fun main() {
     println("Hello World!")
