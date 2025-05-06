@@ -8,7 +8,7 @@ import com.berlin.presentation.io.Viewer
 class GetWeatherDataUi(
     private val viewer: Viewer,
     private val reader: Reader,
-    private val getWeatherUseCase: GetWeatherUseCase
+    private val getWeatherUseCase: GetWeatherUseCase,
 ) : UiRunner {
     override val id: Int = 1
     override val label: String = "view weather report"
@@ -28,17 +28,21 @@ class GetWeatherDataUi(
 
     fun getLatitude(): Double? {
         viewer.show("Enter latitude (e.g., 32.61889) or type 'back' to return main menu :")
-      reader.readLatitude()
-        viewer.show("Invalid latitude, please enter a number.")
-        return null
-    }
-        fun getLongitude(): Double?{
-            viewer.show("Enter longitude (e.g., 35.79011) or type 'back' to return main menu :")
-           reader.readLongitude()
-                viewer.show("Invalid longitude, please enter a number.")
-                return null
-            }
-
+        val latitude = reader.readLatitude()
+        if (latitude == null) {
+            viewer.show("Invalid latitude, please enter a number.")
         }
+        return latitude
+    }
+
+    fun getLongitude(): Double? {
+        viewer.show("Enter longitude (e.g., 35.79011) or type 'back' to return main menu :")
+        val longitude = reader.readLongitude()
+        if (longitude == null) {
+            viewer.show("Invalid longitude, please enter a number.")
+        }
+        return longitude
+    }
+}
 
 

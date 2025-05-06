@@ -12,7 +12,7 @@ import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 class MainMenuUiTest{
     private lateinit var viewer: Viewer
@@ -71,5 +71,22 @@ class MainMenuUiTest{
         coEvery { fake.start() } just Runs
     }
 
+    @Test
+    fun `should run runner when valid input is provided`() = runBlocking {
+        val runner = mockk<UiRunner>(relaxed = true)
+        every { runner.id } returns 1
+        every { runner.label } returns "Fake Runner"
+        coEvery { runner.start() } just Runs
 
+        val menu = MainMenuUi(listOf(runner), viewer, reader)
+
+        assert(menu.id == 0)
+
+        coEvery { reader.read() } returnsMany listOf("1", "exit")
+
+        menu.start()
+
+        coEvery { runner.start() }
+        verify { viewer.show("Goodbye!") }
+    }
 }
