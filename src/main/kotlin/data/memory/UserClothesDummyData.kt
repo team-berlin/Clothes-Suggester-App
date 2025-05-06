@@ -3,7 +3,7 @@ package com.berlin.data.memory
 import com.berlin.domain.model.UserClothes
 
 object UserClothesDummyData {
-    val userClothes = listOf(
+    var userClothes = listOf(
         UserClothes(
             outfitStyle = "casual",
             top = "Crop top",

@@ -26,27 +26,15 @@ class GetWeatherDataUi(
         }
     }
 
-    private fun getLatitude(): Double? {
+    fun getLatitude(): Double? {
         viewer.show("Enter latitude (e.g., 32.61889) or type 'back' to return main menu :")
-        val latInput = reader.read()?.trim() ?: return null
-        if (latInput.equals("back", ignoreCase = true)) return null
-
-        val latitude = latInput.toDoubleOrNull()
-        if (latitude != null) {
-            return latitude
-        }
+      reader.readLatitude()
         viewer.show("Invalid latitude, please enter a number.")
         return null
     }
-        private fun getLongitude(): Double?{
+        fun getLongitude(): Double?{
             viewer.show("Enter longitude (e.g., 35.79011) or type 'back' to return main menu :")
-            val lonInput = reader.read()?.trim() ?: return null
-            if (lonInput.equals("back", ignoreCase = true)) return null
-
-            val longitude = lonInput.toDoubleOrNull()
-            if (longitude != null) {
-                return longitude
-            }
+           reader.readLongitude()
                 viewer.show("Invalid longitude, please enter a number.")
                 return null
             }
