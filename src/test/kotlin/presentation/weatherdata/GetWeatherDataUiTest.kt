@@ -99,3 +99,4 @@ class GetWeatherDataUiTest {
         val WEATHER_DATA = WeatherData(temperature = 27.5, weatherCode = 2, windSpeed = 6.4)
     }
 }
+
