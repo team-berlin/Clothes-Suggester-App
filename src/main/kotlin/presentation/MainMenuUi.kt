@@ -17,11 +17,11 @@ class MainMenuUi(
             showMenu()
             val input = reader.read()?.trim()
             if (input.equals("exit", ignoreCase = true)) {
-                viewer.show("Goodbye!")
                 break
             }
             handleSelection(input)
         }
+        viewer.show("Goodbye!")
     }
 
     private fun showMenu() {
