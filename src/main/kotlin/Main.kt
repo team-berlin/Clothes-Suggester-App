@@ -57,7 +57,7 @@ suspend fun start(
 
         try {
             val weatherData = getWeatherUseCase(latitude, longitude)
-            viewer.show("Weather: ${weatherData.temperature}°C, Code: ${weatherData.weatherCode}")
+            viewer.show("Weather: ${weatherData.temperature}°C")
         } catch (e: Exception) {
             viewer.show("Failed to fetch weather: ${e.message}")
         }
