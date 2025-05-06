@@ -63,8 +63,8 @@ class WeatherRepositoryImplTest {
     fun `fetchWeather should return mapped WeatherData`() = runBlocking {
         val result = repository.fetchWeather(52.52, 13.405)
 
-        assertEquals(18.5, result.temperature)
-        assertEquals(5.2, result.windSpeed)
+        assertEquals(18.5, result?.temperature)
+        assertEquals(5.2, result?.windSpeed)
     }
 
     @Test

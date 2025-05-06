@@ -7,6 +7,7 @@ class GetWeatherUseCase(
     private val repository: WeatherRepository
 ) {
     suspend operator fun invoke(latitude: Double, longitude: Double): WeatherData {
+
         return repository.fetchWeather(latitude, longitude)
     }
 }
