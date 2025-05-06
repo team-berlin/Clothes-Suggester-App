@@ -29,25 +29,34 @@ class GetWeatherClothesUi(
         }
     }
 
-    private fun getLatitude(): Double? {
+    fun getLatitude(): Double? {
         viewer.show("Enter latitude (e.g., 32.61889) or type 'back' to return main menu :")
-        reader.readLatitude()
-        viewer.show("Invalid latitude, please enter a number.")
-        return null
+        val latitude = reader.readLatitude()
+        if (latitude == null) {
+            viewer.show("Invalid latitude, please enter a number.")
+        }
+        return latitude
     }
 
     fun getLongitude(): Double? {
         viewer.show("Enter longitude (e.g., 35.79011) or type 'back' to return main menu :")
-        reader.readLongitude()
-        viewer.show("Invalid longitude, please enter a number.")
-        return null
-    }
-    private fun displayWeatherOutfit(weatherOutfit: UserClothes) {
-        viewer.show(
-            "Recommended outfit based on weather:\n" + "- Style: ${weatherOutfit.outfitStyle}\n" + "- Top: ${weatherOutfit.top}\n" + "- Bottom: ${weatherOutfit.bottom}\n" + "- Shoes: ${weatherOutfit.shoes}\n" + "- Accessories: ${weatherOutfit.accessories.joinToString()}"
-        )
+        val longitude = reader.readLongitude()
+        if (longitude == null) {
+            viewer.show("Invalid longitude, please enter a number.")
+        }
+        return longitude
     }
 
+    private fun displayWeatherOutfit(weatherOutfit: UserClothes) {
+        viewer.show(
+            "Recommended outfit based on weather:\n"
+                + "- Style: ${weatherOutfit.outfitStyle}\n"
+                + "- Top: ${weatherOutfit.top}\n"
+                + "- Bottom: ${weatherOutfit.bottom}\n"
+                + "- Shoes: ${weatherOutfit.shoes}\n"
+                + "- Accessories: ${weatherOutfit.accessories.joinToString()}"
+        )
+    }
 }
 
 
