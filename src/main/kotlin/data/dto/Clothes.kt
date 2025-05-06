@@ -1,9 +1,9 @@
 package com.berlin.data.dto
 
-import com.berlin.domain.model.Temp
+import com.berlin.domain.model.TemperatureRange
 
 data class Clothes(
-    val temperatureRange: Temp,
+    val temperatureRange: TemperatureRange,
     val weatherCondition: String,
     val outfitStyle: String,
     val top: String,

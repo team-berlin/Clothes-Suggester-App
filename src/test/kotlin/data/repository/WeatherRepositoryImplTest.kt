@@ -1,6 +1,7 @@
 package com.berlin.data.repository
 
 import com.berlin.data.mapper.WeatherMapperImpl
+import com.google.common.truth.Truth.assertThat
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.client.engine.mock.respond
@@ -63,8 +64,8 @@ class WeatherRepositoryImplTest {
     fun `fetchWeather should return mapped WeatherData`() = runBlocking {
         val result = repository.fetchWeather(52.52, 13.405)
 
-        assertEquals(18.5, result?.temperature)
-        assertEquals(5.2, result?.windSpeed)
+        assertThat(result.temperature).isEqualTo(18.5)
+        assertThat(result.windSpeed).isEqualTo(5.2)
     }
 
     @Test
@@ -77,6 +78,6 @@ class WeatherRepositoryImplTest {
             failingRepository.fetchWeather(52.52, 13.405)
         }
 
-        assertEquals("Failed to fetch weather", exception.message)
+        assertThat(exception.message).isEqualTo("Failed to fetch weather")
     }
 }

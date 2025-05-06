@@ -2,6 +2,7 @@ package com.berlin.domain.usecase
 
 import com.berlin.domain.mapper.ClothesMapper
 import com.berlin.data.dto.Clothes
+import com.berlin.domain.exepction.ClothesSuggestionException
 import com.berlin.domain.model.UserClothes
 import com.berlin.domain.repository.ClothesRepository
 
@@ -16,7 +17,7 @@ class SuggestClothesTemperatureUseCase(
         return clothesRepository.getAllClothes()
             .filter { isClothingSuitable(it, temperature) }
             .map { clothesMapper.toUserClothesData(it) }
-            .ifEmpty { throw NoSuchElementException("No Clothes Found") }
+            .ifEmpty { throw ClothesSuggestionException("No Clothes Found") }
     }
 
     fun isClothingSuitable(clothes: Clothes, temperature: Double): Boolean {

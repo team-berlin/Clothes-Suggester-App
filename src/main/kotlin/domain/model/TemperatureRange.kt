@@ -1,6 +1,6 @@
 package com.berlin.domain.model
 
-data class Temp(
+data class TemperatureRange(
     val high: Double,
     val low: Double
 )
