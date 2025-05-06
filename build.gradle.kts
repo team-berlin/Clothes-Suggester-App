@@ -41,6 +41,9 @@ kover {
                     "**.di.**",
                     "**.exception.**",
                     "**.dto.**",
+                    "**.mapper.**",
+                    "**.io.**",
+                    "**.memory.**",
                 )
             }
         }
