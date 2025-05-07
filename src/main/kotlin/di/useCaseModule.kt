@@ -7,6 +7,6 @@ import org.koin.dsl.module
 val useCaseModule = module {
 
     single { GetWeatherUseCase(get()) }
-    single { SuggestClothesTemperatureUseCase(get(),
-        get(), get()) }
+    single { SuggestClothesTemperatureUseCase(get(),get(), get()) }
+
 }
