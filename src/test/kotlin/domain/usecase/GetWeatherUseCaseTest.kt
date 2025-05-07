@@ -24,9 +24,9 @@ class GetWeatherUseCaseTest {
     @Test
     fun `invoke should return weather data when repository returns data`() = runTest {
         val expectedWeatherData = WeatherData(temperature = 25.0, windSpeed = 5.0)
-        coEvery { repository.fetchWeather(52.52, 13.405) } returns expectedWeatherData
+        coEvery { repository.fetchWeather() } returns expectedWeatherData
 
-        val result = useCase.invoke(52.52, 13.405)
+        val result = useCase.invoke()
 
         assertThat(result).isEqualTo(expectedWeatherData)
     }
