@@ -1,5 +1,7 @@
 package com.berlin.di
 
+import com.berlin.data.mapper.IpGeolocationMapper
+import com.berlin.data.mapper.IpGeolocationMapperImpl
 import com.berlin.data.mapper.WeatherMapper
 import com.berlin.data.mapper.WeatherMapperImpl
 import com.berlin.domain.mapper.ClothesMapper
@@ -23,5 +25,6 @@ val dataModule = module {
     }
 
     single<WeatherMapper> { WeatherMapperImpl() }
+    single<IpGeolocationMapper> { IpGeolocationMapperImpl() }
     single<ClothesMapper> { ClothesMapperImpl() }
 }

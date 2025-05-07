@@ -11,8 +11,8 @@ class SuggestClothesTemperatureUseCase(
     private val getWeatherUseCase: GetWeatherUseCase,
     private val clothesMapper: ClothesMapper
 ) {
-    suspend operator fun invoke(latitude: Double, longitude: Double): List<UserClothes> {
-        val temperature = getWeatherUseCase.invoke(latitude, longitude).temperature
+    suspend operator fun invoke(): List<UserClothes> {
+        val temperature = getWeatherUseCase().temperature
 
         return clothesRepository.getAllClothes()
             .filter { isClothingSuitable(it, temperature) }

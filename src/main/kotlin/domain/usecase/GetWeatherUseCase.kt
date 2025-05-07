@@ -6,8 +6,7 @@ import com.berlin.domain.repository.WeatherRepository
 class GetWeatherUseCase(
     private val repository: WeatherRepository
 ) {
-    suspend operator fun invoke(latitude: Double, longitude: Double): WeatherData {
-
-        return repository.fetchWeather(latitude, longitude)
+    suspend operator fun invoke(): WeatherData {
+        return repository.fetchWeather()
     }
 }

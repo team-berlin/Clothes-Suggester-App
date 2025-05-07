@@ -7,3 +7,4 @@ data class UserClothes(
     val shoes: String,
     val accessories: List<String>
 )
+
