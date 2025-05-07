@@ -7,7 +7,6 @@ class WeatherMapperImpl : WeatherMapper {
     override fun toWeatherData(response: WeatherResponse): WeatherData {
         return WeatherData(
             temperature = response.currentWeather.temperature,
-            weatherCode = response.currentWeather.weatherCode,
             windSpeed = response.currentWeather.windSpeed
         )
     }
