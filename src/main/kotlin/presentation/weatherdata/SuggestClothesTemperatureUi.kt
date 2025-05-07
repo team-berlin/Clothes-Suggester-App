@@ -5,7 +5,7 @@ import com.berlin.presentation.UiRunner
 import com.berlin.presentation.io.Reader
 import com.berlin.presentation.io.Viewer
 
-class GetWeatherDataUi(
+class SuggestClothesTemperatureUi(
     private val viewer: Viewer,
     private val reader: Reader,
     private val getWeatherUseCase: GetWeatherUseCase,
@@ -20,7 +20,7 @@ class GetWeatherDataUi(
 
         try {
             val weatherData = getWeatherUseCase(latitude, longitude)
-            viewer.show("Weather: ${weatherData.temperature}°C, Code: ${weatherData.weatherCode}")
+            viewer.show("Weather: ${weatherData.temperature}°C")
         } catch (e: Exception) {
             viewer.show("Failed to fetch weather: ${e.message}")
         }

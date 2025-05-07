@@ -5,18 +5,18 @@ import com.berlin.domain.repository.WeatherRepository
 import com.berlin.domain.usecase.GetWeatherUseCase
 import com.berlin.presentation.io.Reader
 import com.berlin.presentation.io.Viewer
-import com.berlin.presentation.weatherdata.GetWeatherDataUi
+import com.berlin.presentation.weatherdata.SuggestClothesTemperatureUi
 import io.mockk.*
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class GetWeatherDataUiTest {
+class SuggestClothesTemperatureUiTest {
     private lateinit var viewer: Viewer
     private lateinit var reader: Reader
     private lateinit var weatherRepository: WeatherRepository
     private lateinit var getWeatherUseCase: GetWeatherUseCase
-    private lateinit var getWeatherDataUi: GetWeatherDataUi
+    private lateinit var getWeatherDataUi: SuggestClothesTemperatureUi
 
     @BeforeEach
     fun setup() {
@@ -24,7 +24,7 @@ class GetWeatherDataUiTest {
         reader = mockk()
         weatherRepository = mockk()
         getWeatherUseCase = GetWeatherUseCase(weatherRepository)
-        getWeatherDataUi = GetWeatherDataUi(viewer, reader, getWeatherUseCase)
+        getWeatherDataUi = SuggestClothesTemperatureUi(viewer, reader, getWeatherUseCase)
     }
 
     @Test
@@ -60,7 +60,7 @@ class GetWeatherDataUiTest {
     fun `test valid latitude and longitude`() = runTest {
         val latitude = 32.61889
         val longitude = 35.79011
-        val weatherData = WeatherData(temperature = 20.0, weatherCode = 1, windSpeed = 10.0)
+        val weatherData = WeatherData(temperature = 20.0, windSpeed = 10.0)
 
         every { reader.readLatitude() } returns latitude
         every { reader.readLongitude() } returns longitude
@@ -69,7 +69,7 @@ class GetWeatherDataUiTest {
         getWeatherDataUi.start()
 
         // Updated to match actual implementation output
-        verify { viewer.show("Weather: 20.0°C, Code: 1") }
+        verify { viewer.show("Weather: 20.0°C") }
     }
 
     @Test
@@ -92,11 +92,11 @@ class GetWeatherDataUiTest {
         getWeatherDataUi.start()
 
         // Updated to match actual implementation output
-        verify { viewer.show("Weather: 27.5°C, Code: 2") }
+        verify { viewer.show("Weather: 27.5°C") }
     }
 
     private companion object {
-        val WEATHER_DATA = WeatherData(temperature = 27.5, weatherCode = 2, windSpeed = 6.4)
+        val WEATHER_DATA = WeatherData(temperature = 27.5, windSpeed = 6.4)
     }
 }
 

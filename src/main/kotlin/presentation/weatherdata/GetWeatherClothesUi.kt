@@ -1,8 +1,9 @@
 package com.berlin.presentation.weatherdata
 
-import com.berlin.data.memory.UserClothesDummyData
-import com.berlin.domain.model.UserClothes
+import com.berlin.data.dto.Clothes
+import com.berlin.data.memory.ClothesDummyData
 import com.berlin.domain.usecase.GetWeatherUseCase
+import com.berlin.domain.usecase.SuggestClothesTemperatureUseCase
 import com.berlin.presentation.UiRunner
 import com.berlin.presentation.io.Reader
 import com.berlin.presentation.io.Viewer
@@ -11,6 +12,7 @@ class GetWeatherClothesUi(
     private val viewer: Viewer,
     private val reader: Reader,
     private val getWeatherUseCase: GetWeatherUseCase,
+    private val getWeatherClothesUseCase: SuggestClothesTemperatureUseCase
 ) : UiRunner {
     override val id: Int = 2
     override val label: String = "Get weather clothes depends temp"
@@ -20,12 +22,17 @@ class GetWeatherClothesUi(
 
         val longitude = getLongitude() ?: return
 
+        getWeatherClothesUseCase.invoke(latitude, longitude)
         val temperature = getWeatherUseCase(latitude, longitude).temperature
-        //get weather clothes use case (temperature)
-
-        val weatherOutfits = UserClothesDummyData.userClothes
-        weatherOutfits.forEach { weatherOutfit ->
-            displayWeatherOutfit(weatherOutfit)
+        val dummyData = ClothesDummyData.getClothesDummyData()
+        val suitableClothes = dummyData.filter { clothes ->
+            getWeatherClothesUseCase.isClothingSuitable(clothes, temperature)
+        }
+        if (suitableClothes.isEmpty()) {
+            viewer.show("No suitable clothes found for $temperature°C.")
+        }
+        suitableClothes.forEach { clothes ->
+            displayWeatherOutfit(clothes)
         }
     }
 
@@ -47,14 +54,9 @@ class GetWeatherClothesUi(
         return longitude
     }
 
-    private fun displayWeatherOutfit(weatherOutfit: UserClothes) {
+    private fun displayWeatherOutfit(weatherOutfit: Clothes) {
         viewer.show(
-            "Recommended outfit based on weather:\n"
-                + "- Style: ${weatherOutfit.outfitStyle}\n"
-                + "- Top: ${weatherOutfit.top}\n"
-                + "- Bottom: ${weatherOutfit.bottom}\n"
-                + "- Shoes: ${weatherOutfit.shoes}\n"
-                + "- Accessories: ${weatherOutfit.accessories.joinToString()}"
+            "Recommended outfit based on weather:\n" + "- Style: ${weatherOutfit.outfitStyle}\n" + "- Top: ${weatherOutfit.top}\n" + "- Bottom: ${weatherOutfit.bottom}\n" + "- Shoes: ${weatherOutfit.shoes}\n" + "- Accessories: ${weatherOutfit.accessories.joinToString()}"
         )
     }
 }
