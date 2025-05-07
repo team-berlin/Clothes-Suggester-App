@@ -1,6 +1,5 @@
 package com.berlin.presentation.weatherdata
 
-import com.berlin.data.memory.UserClothesDummyData
 import com.berlin.domain.model.UserClothes
 import com.berlin.domain.usecase.GetWeatherUseCase
 import com.berlin.domain.usecase.SuggestClothesTemperatureUseCase

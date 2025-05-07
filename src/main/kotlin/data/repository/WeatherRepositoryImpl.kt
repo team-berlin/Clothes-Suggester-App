@@ -21,8 +21,8 @@ class WeatherRepositoryImpl(
 ) : WeatherRepository {
 
     override suspend fun fetchWeather(): WeatherData {
+        val coordinates = fetchCoordinates()
         try {
-            val coordinates = fetchCoordinates()
             val response = client.get("https://api.open-meteo.com/v1/forecast") {
                 url {
                     parameters.append("latitude", coordinates.latitude.toString())
@@ -30,12 +30,15 @@ class WeatherRepositoryImpl(
                     parameters.append("current_weather", "true")
                 }
             }.bodyAsText()
+
             val weatherResponse = Json.decodeFromString<WeatherResponse>(response)
             return weatherMapper.toWeatherData(weatherResponse)
+
         } catch (e: Exception) {
             throw WeatherFetchException("Failed to fetch weather")
         }
     }
+
 
     private suspend fun fetchCoordinates(): Coordinates {
         try {
@@ -43,7 +46,7 @@ class WeatherRepositoryImpl(
             val geolocationResponse = Json.decodeFromString<IpGeolocationResponse>(response)
             return geolocationMapper.toCoordinates(geolocationResponse)
         } catch (e: Exception) {
-            throw GeolocationFetchException("Failed to fetch weather")
+            throw GeolocationFetchException("Failed to fetch coordinates")
         }
     }
 }

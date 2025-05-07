@@ -9,15 +9,19 @@ import kotlinx.coroutines.runBlocking
 import org.koin.core.context.startKoin
 import org.koin.mp.KoinPlatform.getKoin
 
-fun main() {
-
-    startKoin {
-        modules(appModule, dataModule, useCaseModule, uiModule)
+fun startApp() {
+    if (org.koin.core.context.GlobalContext.getOrNull() == null) {
+        startKoin {
+            modules(appModule, dataModule, useCaseModule, uiModule)
+        }
     }
+}
 
+
+fun main() {
+    startApp()
     runBlocking {
         val mainMenuUi: MainMenuUi = getKoin().get()
         mainMenuUi.start()
     }
-
 }

@@ -12,7 +12,7 @@ class SuggestClothesTemperatureUseCase(
     private val clothesMapper: ClothesMapper
 ) {
     suspend operator fun invoke(): List<UserClothes> {
-        val temperature = getWeatherUseCase.invoke().temperature
+        val temperature = getWeatherUseCase().temperature
 
         return clothesRepository.getAllClothes()
             .filter { isClothingSuitable(it, temperature) }

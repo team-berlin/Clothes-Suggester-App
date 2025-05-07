@@ -63,7 +63,7 @@ class SuggestClothesTemperatureUseCaseTest {
                 it.shoes, it.accessories)
         }
 
-        coEvery { getWeatherUseCase.invoke(latitude, longitude).temperature } returns temperature
+        coEvery { getWeatherUseCase.invoke().temperature } returns temperature
         coEvery { clothesRepository.getAllClothes() } returns clothesList
         every { clothesMapper.toUserClothesData(any()) } answers {
             val clothes = it.invocation.args[0] as Clothes
@@ -76,7 +76,7 @@ class SuggestClothesTemperatureUseCaseTest {
             )
         }
 
-        val result = useCase.invoke(latitude, longitude)
+        val result = useCase.invoke()
         assertThat(result).isEqualTo(mappedClothesList)
         coVerify { clothesRepository.getAllClothes() }
         verify { clothesMapper.toUserClothesData(any()) }
@@ -88,11 +88,11 @@ class SuggestClothesTemperatureUseCaseTest {
         val longitude = 13.405
         val temperature = 5.0
 
-        coEvery { getWeatherUseCase.invoke(latitude, longitude).temperature } returns temperature
+        coEvery { getWeatherUseCase.invoke().temperature } returns temperature
         coEvery { clothesRepository.getAllClothes() } returns emptyList()
 
         val exception = assertThrows<ClothesSuggestionException> {
-            useCase.invoke(latitude, longitude)
+            useCase.invoke()
         }
 
         assertThat(exception.message).isEqualTo("No Clothes Found")
