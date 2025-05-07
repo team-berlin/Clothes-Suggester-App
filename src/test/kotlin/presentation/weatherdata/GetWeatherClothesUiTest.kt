@@ -48,7 +48,8 @@ class GetWeatherClothesUiTest {
 
         getWeatherClothesUi.start()
 
-        coVerify(exactly = 0) { mockViewer.show(any()) }
+        coVerify { mockViewer.show("\nRecommended outfit based on weather:") }
+        coVerify { mockViewer.show("----------------------------------------") }
     }
 
     @Test

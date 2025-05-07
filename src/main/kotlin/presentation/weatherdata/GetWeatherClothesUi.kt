@@ -14,19 +14,19 @@ class GetWeatherClothesUi(
 
     override suspend fun start() {
         val weatherOutfits = suggestClothesTemperature()
-        weatherOutfits.forEach { weatherOutfit ->
-            displayWeatherOutfit(weatherOutfit)
+        viewer.show("\nRecommended outfit based on weather:")
+        weatherOutfits.forEachIndexed { index, weatherOutfit ->
+            displayWeatherOutfit(index, weatherOutfit)
         }
+        viewer.show("----------------------------------------")
     }
 
-    fun displayWeatherOutfit(weatherOutfit: UserClothes) {
-        viewer.show(
-            "Recommended outfit based on weather:\n"
-                + "- Style: ${weatherOutfit.outfitStyle}\n"
-                + "- Top: ${weatherOutfit.top}\n"
-                + "- Bottom: ${weatherOutfit.bottom}\n"
-                + "- Shoes: ${weatherOutfit.shoes}\n"
-                + "- Accessories: ${weatherOutfit.accessories.joinToString()}"
+    private fun displayWeatherOutfit(index: Int, weatherOutfit: UserClothes) {
+        viewer.show( "${index + 1} - ${weatherOutfit.outfitStyle}\n"
+                + "\t- Top: ${weatherOutfit.top}\n"
+                + "\t- Bottom: ${weatherOutfit.bottom}\n"
+                + "\t- Shoes: ${weatherOutfit.shoes}\n"
+                + "\t- Accessories: ${weatherOutfit.accessories.joinToString()}"
         )
     }
 }

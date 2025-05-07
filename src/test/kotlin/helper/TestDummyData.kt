@@ -72,12 +72,10 @@ object TestDummyData {
             accessories = listOf("Sunglasses")
         )
     )
-    val EXPECTED_RESULT = "Recommended outfit based on weather:\n" +
-            "- Style: Casual\n" +
-            "- Top: T-Shirt\n" +
-            "- Bottom: Jeans\n" +
-            "- Shoes: Sneakers\n" +
-            "- Accessories: Sunglasses"
-
+    val EXPECTED_RESULT = "1 - Casual\n" +
+            "\t- Top: T-Shirt\n" +
+            "\t- Bottom: Jeans\n" +
+            "\t- Shoes: Sneakers\n" +
+            "\t- Accessories: Sunglasses"
     }
 
