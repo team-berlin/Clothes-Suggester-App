@@ -3,18 +3,23 @@ package com.berlin.domain.usecase
 import com.berlin.data.dto.Clothes
 import com.berlin.domain.exepction.ClothesSuggestionException
 import com.berlin.domain.mapper.ClothesMapper
-import com.berlin.domain.model.TemperatureRange
 import com.berlin.domain.model.UserClothes
 import com.berlin.domain.repository.ClothesRepository
 import com.google.common.truth.Truth.assertThat
-import io.mockk.*
+import helper.TestDummyData.CLOTHES_SUITABLE
+import helper.TestDummyData.FILTERD_CLOTHES
+import helper.TestDummyData.NO_CLOTHES_EXCEPTION
+import helper.TestDummyData.SUNNY_CLOTHES
+import helper.TestDummyData.TEMPRATURE
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import kotlin.test.assertEquals
 
 class SuggestClothesTemperatureUseCaseTest {
 
@@ -28,43 +33,20 @@ class SuggestClothesTemperatureUseCaseTest {
         clothesRepository = mockk()
         getWeatherUseCase = mockk()
         clothesMapper = mockk()
-        useCase = SuggestClothesTemperatureUseCase(clothesRepository, getWeatherUseCase, clothesMapper)
+        useCase =
+            SuggestClothesTemperatureUseCase(clothesRepository, getWeatherUseCase, clothesMapper)
     }
 
     @Test
     fun `invoke should return filtered and mapped clothes list`() = runBlocking {
-        val latitude = 52.52
-        val longitude = 13.405
-        val temperature = 18.5
-
-        val clothesList = listOf(
-            Clothes(
-                temperatureRange = TemperatureRange(low = 10.0, high = 20.0),
-                weatherCondition = "Sunny",
-                outfitStyle = "Casual",
-                top = "T-Shirt",
-                bottom = "Jeans",
-                shoes = "Sneakers",
-                accessories = listOf("Sunglasses")
-            ),
-            Clothes(
-                temperatureRange = TemperatureRange(low = 15.0, high = 25.0),
-                weatherCondition = "Cloudy",
-                outfitStyle = "Semi-Casual",
-                top = "Sweater",
-                bottom = "Chinos",
-                shoes = "Boots",
-                accessories = listOf("Scarf")
+        val mappedClothesList = FILTERD_CLOTHES.map {
+            UserClothes(
+                it.outfitStyle, it.top, it.bottom, it.shoes, it.accessories
             )
-        )
-
-        val mappedClothesList = clothesList.map {
-            UserClothes(it.outfitStyle, it.top, it.bottom,
-                it.shoes, it.accessories)
         }
 
-        coEvery { getWeatherUseCase.invoke().temperature } returns temperature
-        coEvery { clothesRepository.getAllClothes() } returns clothesList
+        coEvery { getWeatherUseCase.invoke().temperature } returns TEMPRATURE
+        coEvery { clothesRepository.getAllClothes() } returns FILTERD_CLOTHES
         every { clothesMapper.toUserClothesData(any()) } answers {
             val clothes = it.invocation.args[0] as Clothes
             UserClothes(
@@ -84,63 +66,34 @@ class SuggestClothesTemperatureUseCaseTest {
 
     @Test
     fun `invoke should throw exception when no clothes match`() = runBlocking {
-        val latitude = 52.52
-        val longitude = 13.405
-        val temperature = 5.0
-
-        coEvery { getWeatherUseCase.invoke().temperature } returns temperature
+        coEvery { getWeatherUseCase.invoke().temperature } returns TEMPRATURE
         coEvery { clothesRepository.getAllClothes() } returns emptyList()
 
         val exception = assertThrows<ClothesSuggestionException> {
             useCase.invoke()
         }
 
-        assertThat(exception.message).isEqualTo("No Clothes Found")
+        assertThat(exception.message).isEqualTo(NO_CLOTHES_EXCEPTION)
     }
 
     @Test
     fun `isClothingSuitable should return true when temperature is within range`() {
-        val clothes = Clothes(
-            temperatureRange = TemperatureRange(low = 10.0, high = 20.0),
-            weatherCondition = "Sunny",
-            outfitStyle = "Casual",
-            top = "T-Shirt",
-            bottom = "Jeans",
-            shoes = "Sneakers",
-            accessories = listOf("Sunglasses")
-        )
-
+        val clothes = CLOTHES_SUITABLE
         val result = useCase.isClothingSuitable(clothes, 15.0)
 
         assertThat(result).isTrue()
     }
+
     @Test
     fun `isClothingSuitable should return true for boundary values`() {
-        val clothes = Clothes(
-            temperatureRange = TemperatureRange(low = 10.0, high = 20.0),
-            weatherCondition = "Sunny",
-            outfitStyle = "Casual",
-            top = "T-Shirt",
-            bottom = "Jeans",
-            shoes = "Sneakers",
-            accessories = listOf("Sunglasses")
-        )
-
+        val clothes = SUNNY_CLOTHES
         assertThat(useCase.isClothingSuitable(clothes, 10.0)).isTrue()
         assertThat(useCase.isClothingSuitable(clothes, 20.0)).isTrue()
     }
 
     @Test
     fun `isClothingSuitable should return false when temperature is below range`() {
-        val clothes = Clothes(
-            temperatureRange = TemperatureRange(low = 10.0, high = 20.0),
-            weatherCondition = "Sunny",
-            outfitStyle = "Casual",
-            top = "T-Shirt",
-            bottom = "Jeans",
-            shoes = "Sneakers",
-            accessories = listOf("Sunglasses")
-        )
+        val clothes = SUNNY_CLOTHES
 
         val result = useCase.isClothingSuitable(clothes, 5.0)
 
@@ -149,19 +102,12 @@ class SuggestClothesTemperatureUseCaseTest {
 
     @Test
     fun `isClothingSuitable should return false when temperature is above range`() {
-        val clothes = Clothes(
-            temperatureRange = TemperatureRange(low = 10.0, high = 20.0),
-            weatherCondition = "Sunny",
-            outfitStyle = "Casual",
-            top = "T-Shirt",
-            bottom = "Jeans",
-            shoes = "Sneakers",
-            accessories = listOf("Sunglasses")
-        )
+        val clothes = SUNNY_CLOTHES
 
         val result = useCase.isClothingSuitable(clothes, 25.0)
 
         assertThat(result).isFalse()
     }
+
 
 }
