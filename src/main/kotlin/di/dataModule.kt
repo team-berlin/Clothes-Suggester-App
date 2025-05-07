@@ -2,6 +2,8 @@ package com.berlin.di
 
 import com.berlin.data.mapper.WeatherMapper
 import com.berlin.data.mapper.WeatherMapperImpl
+import com.berlin.domain.mapper.ClothesMapper
+import com.berlin.domain.mapper.ClothesMapperImpl
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -21,4 +23,5 @@ val dataModule = module {
     }
 
     single<WeatherMapper> { WeatherMapperImpl() }
+    single<ClothesMapper> { ClothesMapperImpl() }
 }
