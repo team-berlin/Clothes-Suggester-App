@@ -2,7 +2,7 @@ package com.berlin.domain.usecase
 
 import com.berlin.data.dto.Clothes
 import com.berlin.domain.exepction.ClothesSuggestionException
-import com.berlin.domain.mapper.ClothesMapper
+import com.berlin.data.mapper.ClothesMapper
 import com.berlin.domain.model.UserClothes
 import com.berlin.domain.repository.ClothesRepository
 import com.google.common.truth.Truth.assertThat

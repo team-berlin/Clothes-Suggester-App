@@ -8,5 +8,5 @@ import org.koin.dsl.module
 
 val appModule = module {
     single<WeatherRepository> { WeatherRepositoryImpl(get(), get(), get()) }
-    single<ClothesRepository> { ClothesRepositoryImpl()  }
+    single<ClothesRepository> { ClothesRepositoryImpl(get())  }
 }

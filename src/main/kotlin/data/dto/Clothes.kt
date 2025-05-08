@@ -10,4 +10,3 @@ data class Clothes(
     val shoes: String,
     val accessories: List<String>
 )
-

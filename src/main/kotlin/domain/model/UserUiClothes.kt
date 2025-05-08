@@ -1,8 +1,6 @@
 package com.berlin.domain.model
 
-data class UserClothes(
-    val temperatureRange: TemperatureRange,
-    val weatherCondition: String,
+data class UserUiClothes(
     val outfitStyle: String,
     val top: String,
     val bottom: String,
