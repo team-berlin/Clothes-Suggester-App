@@ -17,7 +17,6 @@ fun startApp() {
     }
 }
 
-
 fun main() {
     startApp()
     runBlocking {

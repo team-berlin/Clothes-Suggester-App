@@ -1,6 +1,6 @@
 package com.berlin.domain.repository
 
-import com.berlin.data.dto.Clothes
+import com.berlin.data.local.dto.ClothesDto
 interface ClothesRepository{
-    suspend fun getAllClothes(): List<Clothes>
+    suspend fun getAllClothes(): List<ClothesDto>
 }

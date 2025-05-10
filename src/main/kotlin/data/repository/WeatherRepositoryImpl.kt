@@ -1,6 +1,6 @@
 package com.berlin.data.repository
 
-import com.berlin.data.dto.WeatherResponse
+import com.berlin.data.remote.dto.WeatherResponseDto
 import com.berlin.data.mapper.IpGeolocationMapper
 import com.berlin.data.mapper.WeatherMapper
 import com.berlin.domain.exepction.GeolocationFetchException
@@ -8,7 +8,7 @@ import com.berlin.domain.exepction.WeatherFetchException
 import com.berlin.domain.model.Coordinates
 import com.berlin.domain.model.WeatherData
 import com.berlin.domain.repository.WeatherRepository
-import data.dto.IpGeolocationResponse
+import com.berlin.data.remote.dto.IpGeolocationResponseDto
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -31,7 +31,7 @@ class WeatherRepositoryImpl(
                 }
             }.bodyAsText()
 
-            val weatherResponse = Json.decodeFromString<WeatherResponse>(response)
+            val weatherResponse = Json.decodeFromString<WeatherResponseDto>(response)
             return weatherMapper.toWeatherData(weatherResponse)
 
         } catch (e: Exception) {
@@ -43,7 +43,7 @@ class WeatherRepositoryImpl(
     private suspend fun fetchCoordinates(): Coordinates {
         try {
             val response = client.get("http://ip-api.com/json").bodyAsText()
-            val geolocationResponse = Json.decodeFromString<IpGeolocationResponse>(response)
+            val geolocationResponse = Json.decodeFromString<IpGeolocationResponseDto>(response)
             return geolocationMapper.toCoordinates(geolocationResponse)
         } catch (e: Exception) {
             throw GeolocationFetchException("Failed to fetch coordinates")

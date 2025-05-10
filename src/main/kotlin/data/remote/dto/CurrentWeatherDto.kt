@@ -1,10 +1,10 @@
-package com.berlin.data.dto
+package com.berlin.data.remote.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CurrentWeather(
+data class CurrentWeatherDto(
     val time: String,
     val interval: Int,
     val temperature: Double,

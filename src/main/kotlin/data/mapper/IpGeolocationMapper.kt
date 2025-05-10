@@ -1,8 +1,8 @@
 package com.berlin.data.mapper
 
 import com.berlin.domain.model.Coordinates
-import data.dto.IpGeolocationResponse
+import com.berlin.data.remote.dto.IpGeolocationResponseDto
 
 interface IpGeolocationMapper {
-    fun toCoordinates(response: IpGeolocationResponse): Coordinates
+    fun toCoordinates(response: IpGeolocationResponseDto): Coordinates
 }

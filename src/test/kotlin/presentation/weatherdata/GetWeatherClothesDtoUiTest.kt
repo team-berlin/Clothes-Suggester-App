@@ -14,7 +14,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class GetWeatherClothesUiTest {
+class GetWeatherClothesDtoUiTest {
 
     private lateinit var mockViewer: Viewer
     private lateinit var mockSuggestClothesTemperatureUseCase: SuggestClothesTemperatureUseCase
