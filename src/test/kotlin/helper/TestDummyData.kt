@@ -1,13 +1,13 @@
 package helper
 
-import com.berlin.data.dto.Clothes
+import com.berlin.data.dto.ClothesDto
 import com.berlin.domain.model.TemperatureRange
 import com.berlin.domain.model.UserClothes
 
 object TestDummyData {
         val TEMPRATURE = 18.5
         val NO_CLOTHES_EXCEPTION = "No Clothes Found"
-        val SUNNY_CLOTHES = Clothes(
+        val SUNNY_CLOTHES = ClothesDto(
             temperatureRange = TemperatureRange(low = 10.0, high = 20.0),
             weatherCondition = "Sunny",
             outfitStyle = "Casual",
@@ -16,7 +16,7 @@ object TestDummyData {
             shoes = "Sneakers",
             accessories = listOf("Sunglasses")
         )
-        val CLOTHES_SUITABLE = Clothes(
+        val CLOTHES_SUITABLE = ClothesDto(
             temperatureRange = TemperatureRange(low = 10.0, high = 20.0),
             weatherCondition = "Sunny",
             outfitStyle = "Casual",
@@ -25,7 +25,7 @@ object TestDummyData {
             shoes = "Sneakers",
             accessories = listOf("Sunglasses")
         )
-        val FILTERD_CLOTHES =  listOf( Clothes(
+        val FILTERD_CLOTHES =  listOf( ClothesDto(
             temperatureRange =  TemperatureRange(low = 10.0, high = 20.0),
             weatherCondition = "Sunny",
             outfitStyle = "Casual",
@@ -34,7 +34,7 @@ object TestDummyData {
             shoes = "Sneakers",
             accessories = listOf("Sunglasses")
         ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 15.0, high = 25.0),
                 weatherCondition = "Cloudy",
                 outfitStyle = "Semi-Casual",

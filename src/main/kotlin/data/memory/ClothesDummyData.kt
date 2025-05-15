@@ -1,12 +1,12 @@
 package com.berlin.data.memory
 
-import com.berlin.data.dto.Clothes
+import com.berlin.data.dto.ClothesDto
 import com.berlin.domain.model.TemperatureRange
 
-object ClothesDummyData {
-    fun getClothesDummyData(): List<Clothes>{
+class ClothesDummyData {
+    fun getClothesDummyData(): List<ClothesDto>{
         return listOf(
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 30.0, high = 40.0),
                 weatherCondition = "hot",
                 outfitStyle = "casual",
@@ -15,7 +15,7 @@ object ClothesDummyData {
                 shoes = "Flip-flops",
                 accessories = listOf("Cap", "Sunglasses")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 20.0, high = 30.0),
                 weatherCondition = "sunny",
                 outfitStyle = "semi-formal",
@@ -24,7 +24,7 @@ object ClothesDummyData {
                 shoes = "Loafers",
                 accessories = listOf("Watch", "Belt")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 0.0, high = 10.0),
                 weatherCondition = "rainy",
                 outfitStyle = "casual",
@@ -33,7 +33,7 @@ object ClothesDummyData {
                 shoes = "Boots",
                 accessories = listOf("Umbrella", "Scarf")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 25.0, high = 35.0),
                 weatherCondition = "sunny",
                 outfitStyle = "casual",
@@ -42,7 +42,7 @@ object ClothesDummyData {
                 shoes = "Sandals",
                 accessories = listOf("Hat", "Sunglasses")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 15.0, high = 25.0),
                 weatherCondition = "cloudy",
                 outfitStyle = "formal",
@@ -51,7 +51,7 @@ object ClothesDummyData {
                 shoes = "Oxfords",
                 accessories = listOf("Watch", "Tie")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = -5.0, high = 5.0),
                 weatherCondition = "snowy",
                 outfitStyle = "casual",
@@ -60,7 +60,7 @@ object ClothesDummyData {
                 shoes = "Sneakers",
                 accessories = listOf("Gloves", "Scarf")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 30.0, high = 40.0),
                 weatherCondition = "hot",
                 outfitStyle = "casual",
@@ -69,7 +69,7 @@ object ClothesDummyData {
                 shoes = "Flip-flops",
                 accessories = listOf("Necklace", "Sunglasses")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 20.0, high = 30.0),
                 weatherCondition = "partly cloudy",
                 outfitStyle = "casual",
@@ -78,7 +78,7 @@ object ClothesDummyData {
                 shoes = "Sneakers",
                 accessories = listOf("Cap", "Watch")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 5.0, high = 15.0),
                 weatherCondition = "rainy",
                 outfitStyle = "semi-formal",
@@ -87,7 +87,7 @@ object ClothesDummyData {
                 shoes = "Chelsea boots",
                 accessories = listOf("Umbrella", "Leather gloves")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 15.0, high = 25.0),
                 weatherCondition = "cloudy",
                 outfitStyle = "casual",
@@ -96,7 +96,7 @@ object ClothesDummyData {
                 shoes = "Running shoes",
                 accessories = listOf("Backpack", "Cap")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = -5.0, high = 5.0),
                 weatherCondition = "snowy",
                 outfitStyle = "formal",
@@ -105,7 +105,7 @@ object ClothesDummyData {
                 shoes = "Leather boots",
                 accessories = listOf("Scarf", "Gloves")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 25.0, high = 35.0),
                 weatherCondition = "sunny",
                 outfitStyle = "sporty",
@@ -114,7 +114,7 @@ object ClothesDummyData {
                 shoes = "Running shoes",
                 accessories = listOf("Sweatband", "Cap")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 10.0, high = 20.0),
                 weatherCondition = "windy",
                 outfitStyle = "casual",
@@ -123,7 +123,7 @@ object ClothesDummyData {
                 shoes = "Sneakers",
                 accessories = listOf("Backpack", "Cap")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 5.0, high = 10.0),
                 weatherCondition = "rainy",
                 outfitStyle = "casual",
@@ -132,7 +132,7 @@ object ClothesDummyData {
                 shoes = "Rain boots",
                 accessories = listOf("Umbrella", "Crossbody bag")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 20.0, high = 30.0),
                 weatherCondition = "sunny",
                 outfitStyle = "boho",
@@ -141,7 +141,7 @@ object ClothesDummyData {
                 shoes = "Sandals",
                 accessories = listOf("Bracelets", "Hat")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 30.0, high = 40.0),
                 weatherCondition = "hot",
                 outfitStyle = "beach",
@@ -150,7 +150,7 @@ object ClothesDummyData {
                 shoes = "Slides",
                 accessories = listOf("Sunglasses", "Beach bag")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 15.0, high = 25.0),
                 weatherCondition = "cloudy",
                 outfitStyle = "casual",
@@ -159,7 +159,7 @@ object ClothesDummyData {
                 shoes = "Sneakers",
                 accessories = listOf("Watch", "Messenger bag")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 5.0, high = 15.0),
                 weatherCondition = "windy",
                 outfitStyle = "semi-formal",
@@ -168,7 +168,7 @@ object ClothesDummyData {
                 shoes = "Loafers",
                 accessories = listOf("Scarf", "Leather bag")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 25.0, high = 35.0),
                 weatherCondition = "sunny",
                 outfitStyle = "casual",
@@ -177,7 +177,7 @@ object ClothesDummyData {
                 shoes = "Flat sandals",
                 accessories = listOf("Anklet", "Sunglasses")
             ),
-            Clothes(
+            ClothesDto(
                 temperatureRange = TemperatureRange(low = 10.0, high = 20.0),
                 weatherCondition = "rainy",
                 outfitStyle = "casual",

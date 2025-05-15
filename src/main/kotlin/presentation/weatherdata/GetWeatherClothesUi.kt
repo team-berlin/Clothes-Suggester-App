@@ -1,5 +1,6 @@
 package com.berlin.presentation.weatherdata
 
+import com.berlin.domain.exepction.ClothesSuggestionException
 import com.berlin.domain.model.UserClothes
 import com.berlin.domain.usecase.SuggestClothesTemperatureUseCase
 import com.berlin.presentation.UiRunner
@@ -13,10 +14,16 @@ class GetWeatherClothesUi(
     override val label: String = "Get weather clothes depends temp"
 
     override suspend fun start() {
-        val weatherOutfits = suggestClothesTemperature()
-        viewer.show("\nRecommended outfit based on weather:")
-        weatherOutfits.forEachIndexed { index, weatherOutfit ->
-            displayWeatherOutfit(index, weatherOutfit)
+        try {
+            val weatherOutfits = suggestClothesTemperature()
+            viewer.show("\nRecommended outfit based on weather:")
+            weatherOutfits.forEachIndexed { index, weatherOutfit ->
+                displayWeatherOutfit(index, weatherOutfit)
+            }
+        }catch (e: ClothesSuggestionException){
+            viewer.show("No suiable outfit available ${e.message}")
+        }catch (e: Exception){
+            viewer.show("An error occurred while fetching the outfit ${e.message}")
         }
         viewer.show("----------------------------------------")
     }

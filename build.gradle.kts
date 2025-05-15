@@ -24,7 +24,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.4.11")
 
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
     testImplementation("io.mockk:mockk:1.14.0")
     testImplementation("io.ktor:ktor-client-mock:2.0.0")
     testImplementation("com.google.truth:truth:1.4.4")

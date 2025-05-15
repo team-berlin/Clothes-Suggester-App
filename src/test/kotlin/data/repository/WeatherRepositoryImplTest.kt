@@ -1,14 +1,20 @@
 package com.berlin.data.repository
 
 import com.berlin.data.mapper.IpGeolocationMapperImpl
-import com.berlin.data.mapper.WeatherMapperImpl
+import com.berlin.data.mapper.WeatherMapperImp
 import com.berlin.domain.exepction.GeolocationFetchException
 import com.berlin.domain.exepction.WeatherFetchException
 import com.google.common.truth.Truth.assertThat
-import io.ktor.client.*
-import io.ktor.client.engine.mock.*
-import io.ktor.http.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.mock.MockEngine
+import io.ktor.client.engine.mock.respond
+import io.ktor.client.engine.mock.respondError
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.http.HttpStatusCode
+import io.ktor.http.headersOf
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -82,8 +88,12 @@ class WeatherRepositoryImplTest {
             }
         }
 
-        client = HttpClient(mockEngine)
-        repository = WeatherRepositoryImpl(client, WeatherMapperImpl(), IpGeolocationMapperImpl())
+        client = HttpClient(mockEngine) {
+            install(ContentNegotiation) {
+                json(Json { ignoreUnknownKeys = true })
+            }
+        }
+        repository = WeatherRepositoryImpl(client, WeatherMapperImp(), IpGeolocationMapperImpl())
     }
 
     @Test
@@ -98,7 +108,7 @@ class WeatherRepositoryImplTest {
     fun `fetchWeather should throw GeolocationFetchException when geolocation fails`() = runBlocking {
         val engine = MockEngine { respondError(HttpStatusCode.BadRequest) }
         val client = HttpClient(engine)
-        val repository = WeatherRepositoryImpl(client, WeatherMapperImpl(), IpGeolocationMapperImpl())
+        val repository = WeatherRepositoryImpl(client, WeatherMapperImp(), IpGeolocationMapperImpl())
 
         val exception = assertThrows<GeolocationFetchException> {
             repository.fetchWeather()
@@ -121,8 +131,12 @@ class WeatherRepositoryImplTest {
             }
         }
 
-        val client = HttpClient(engine)
-        val repository = WeatherRepositoryImpl(client, WeatherMapperImpl(), IpGeolocationMapperImpl())
+        client = HttpClient(engine) {
+            install(ContentNegotiation) {
+                json(Json { ignoreUnknownKeys = true })
+            }
+        }
+        val repository = WeatherRepositoryImpl(client, WeatherMapperImp(), IpGeolocationMapperImpl())
 
         val exception = assertThrows<WeatherFetchException> {
             repository.fetchWeather()

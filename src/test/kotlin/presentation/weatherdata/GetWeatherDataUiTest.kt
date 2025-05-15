@@ -1,3 +1,5 @@
+package com.berlin.presentation.weatherdata
+
 import com.berlin.domain.model.WeatherData
 import com.berlin.domain.usecase.GetWeatherUseCase
 import com.berlin.presentation.io.Viewer

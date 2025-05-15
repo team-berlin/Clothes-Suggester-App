@@ -1,10 +1,10 @@
-package data.dto
+package com.berlin.data.remote.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class IpGeolocationResponse(
+data class IpGeolocationResponseDto(
     val status: String,
     val country: String,
     @SerialName("countryCode") val countryCode: String,

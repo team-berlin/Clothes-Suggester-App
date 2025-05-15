@@ -1,10 +1,11 @@
-package com.berlin.domain.mapper
+package com.berlin.presentation.mapper
 
-import com.berlin.data.dto.Clothes
+import com.berlin.data.dto.ClothesDto
+import com.berlin.domain.mapper.ClothesMapper
 import com.berlin.domain.model.UserClothes
 
 class ClothesMapperImpl : ClothesMapper {
-    override fun toUserClothesData(response: Clothes): UserClothes = UserClothes(
+    override fun toUserClothesData(response: ClothesDto): UserClothes = UserClothes(
         outfitStyle = response.outfitStyle,
         top = response.top,
         bottom = response.bottom,

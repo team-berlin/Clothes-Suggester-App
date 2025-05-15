@@ -21,7 +21,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class SuggestClothesTemperatureUseCaseTest {
+class SuggestClothesDtoDtoTemperatureUseCaseTest {
 
     private lateinit var clothesRepository: ClothesRepository
     private lateinit var getWeatherUseCase: GetWeatherUseCase
