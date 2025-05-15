@@ -1,6 +1,6 @@
 package com.berlin.data.repository
 
-import com.berlin.data.local.dto.ClothesDto
+import com.berlin.data.dto.ClothesDto
 import com.berlin.data.memory.ClothesDummyData
 import com.berlin.domain.model.TemperatureRange
 import com.google.common.truth.Truth.assertThat
@@ -10,7 +10,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import kotlin.test.Test
 
-class ClothesDtoRepositoryImplTest {
+class ClothesDtoDtoRepositoryImplTest {
 
     private lateinit var clothesDummyData: ClothesDummyData
     private lateinit var repository: ClothesRepositoryImpl

@@ -1,7 +1,7 @@
 package com.berlin.data.repository
 
+import com.berlin.data.dto.ClothesDto
 import com.berlin.data.memory.ClothesDummyData
-import com.berlin.data.local.dto.ClothesDto
 import com.berlin.domain.repository.ClothesRepository
 
 class ClothesRepositoryImpl(

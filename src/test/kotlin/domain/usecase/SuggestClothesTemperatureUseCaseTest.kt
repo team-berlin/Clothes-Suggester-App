@@ -1,6 +1,6 @@
 package com.berlin.domain.usecase
 
-import com.berlin.data.dto.Clothes
+import com.berlin.data.dto.ClothesDto
 import com.berlin.domain.exepction.ClothesSuggestionException
 import com.berlin.domain.mapper.ClothesMapper
 import com.berlin.domain.model.UserClothes
@@ -48,7 +48,7 @@ class SuggestClothesTemperatureUseCaseTest {
         coEvery { getWeatherUseCase.invoke().temperature } returns TEMPRATURE
         coEvery { clothesRepository.getAllClothes() } returns FILTERD_CLOTHES
         every { clothesMapper.toUserClothesData(any()) } answers {
-            val clothes = it.invocation.args[0] as Clothes
+            val clothes = it.invocation.args[0] as ClothesDto
             UserClothes(
                 outfitStyle = clothes.outfitStyle,
                 top = clothes.top,

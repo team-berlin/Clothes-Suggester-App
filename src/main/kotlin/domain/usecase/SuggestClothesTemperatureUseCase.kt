@@ -1,8 +1,8 @@
 package com.berlin.domain.usecase
 
-import com.berlin.domain.mapper.ClothesMapper
-import com.berlin.data.local.dto.ClothesDto
+import com.berlin.data.dto.ClothesDto
 import com.berlin.domain.exepction.ClothesSuggestionException
+import com.berlin.domain.mapper.ClothesMapper
 import com.berlin.domain.model.UserClothes
 import com.berlin.domain.repository.ClothesRepository
 

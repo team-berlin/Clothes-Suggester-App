@@ -1,6 +1,7 @@
-package com.berlin.domain.mapper
+package com.berlin.presentation.mapper
 
-import com.berlin.data.local.dto.ClothesDto
+import com.berlin.data.dto.ClothesDto
+import com.berlin.domain.mapper.ClothesMapper
 import com.berlin.domain.model.UserClothes
 
 class ClothesMapperImpl : ClothesMapper {

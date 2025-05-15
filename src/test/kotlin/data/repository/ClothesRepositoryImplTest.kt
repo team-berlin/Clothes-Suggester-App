@@ -6,8 +6,8 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
 class ClothesRepositoryImplTest {
-
-    private val repository = ClothesRepositoryImpl()
+    private val clothesDummyData: ClothesDummyData = ClothesDummyData()
+    private val repository = ClothesRepositoryImpl(clothesDummyData)
 
     @Test
     fun `getAllClothes should return non-empty list of clothes`() = runBlocking {
@@ -18,7 +18,7 @@ class ClothesRepositoryImplTest {
 
     @Test
     fun `getAllClothes should return same data as ClothesDummyData`() = runBlocking {
-        val expected = ClothesDummyData.getClothesDummyData()
+        val expected = clothesDummyData.getClothesDummyData()
         val actual = repository.getAllClothes()
 
         assertThat(actual).isEqualTo(expected)
