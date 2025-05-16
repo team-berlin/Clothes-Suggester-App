@@ -1,5 +1,4 @@
 package data.repository
-
 import com.berlin.data.mapper.IpGeolocationMapperImpl
 import com.berlin.data.repository.CoordinateRepositoryImpl
 import com.berlin.domain.exepction.GeolocationFetchException
