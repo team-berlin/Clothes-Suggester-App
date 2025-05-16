@@ -1,15 +1,17 @@
 package com.berlin.presentation.mapper
 
-import com.berlin.data.dto.ClothesDto
-import com.berlin.domain.mapper.ClothesMapper
+import com.berlin.shered.Mapper
 import com.berlin.domain.model.UserClothes
+import com.berlin.presentation.model.UserClothesUi
 
-class ClothesMapperImpl : ClothesMapper {
-    override fun toUserClothesData(response: ClothesDto): UserClothes = UserClothes(
-        outfitStyle = response.outfitStyle,
-        top = response.top,
-        bottom = response.bottom,
-        shoes = response.shoes,
-        accessories = response.accessories
-    )
+class ClothesMapperImpl: Mapper<UserClothes, UserClothesUi> {
+    override fun map(from: UserClothes): UserClothesUi {
+       return UserClothesUi(
+           outfitStyle = from.outfitStyle,
+           top = from.top,
+           bottom = from.bottom,
+           shoes = from.shoes,
+           accessories = from.accessories
+       )
+    }
 }

@@ -1,8 +1,10 @@
 package com.berlin.data.repository
 
 import com.berlin.data.dto.ClothesDto
+import com.berlin.data.mapper.ClothesDataMapperImpl
 import com.berlin.data.memory.ClothesDummyData
 import com.berlin.domain.model.TemperatureRange
+import com.berlin.domain.model.UserClothes
 import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk
@@ -10,16 +12,19 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import kotlin.test.Test
 
-class ClothesDtoDtoRepositoryImplTest {
+class ClothesDtoRepositoryImplTest {
 
     private lateinit var clothesDummyData: ClothesDummyData
+    private lateinit var clothesDataMapper: ClothesDataMapperImpl
+
     private lateinit var repository: ClothesRepositoryImpl
 
     @BeforeEach
     fun setup() {
         clothesDummyData = mockk()
+        clothesDataMapper = ClothesDataMapperImpl()
         every { clothesDummyData.getClothesDummyData() } returns dummyClothesList
-        repository = ClothesRepositoryImpl(clothesDummyData)
+        repository = ClothesRepositoryImpl(clothesDummyData, clothesDataMapper)
     }
 
     @Test
@@ -30,7 +35,8 @@ class ClothesDtoDtoRepositoryImplTest {
 
     @Test
     fun `getAllClothes should return same data as ClothesDummyData`() = runBlocking {
-        val expected = dummyClothesList
+        val expected: List<UserClothes> = dummyClothesList.map { clothesDataMapper.map(it) }
+
         val actual = repository.getAllClothes()
         assertThat(actual).isEqualTo(expected)
     }
@@ -40,7 +46,7 @@ class ClothesDtoDtoRepositoryImplTest {
         val result = repository.getAllClothes()
 
         result.forEach { clothes ->
-            assertThat(clothes.weatherCondition).isNotEmpty()
+            //temp
             assertThat(clothes.outfitStyle).isNotEmpty()
             assertThat(clothes.top).isNotEmpty()
             assertThat(clothes.bottom).isNotEmpty()

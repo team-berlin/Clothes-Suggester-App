@@ -8,5 +8,4 @@ val appModule = module {
         uiModule,
         useCaseModule
     )
-
 }
