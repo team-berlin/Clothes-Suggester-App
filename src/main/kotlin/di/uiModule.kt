@@ -13,8 +13,8 @@ import org.koin.dsl.module
 val uiModule = module {
     single<Reader> { ConsoleReader() }
     single<Viewer> { ConsoleViewer() }
-    single {GetWeatherDataUi(get(),get())  }
-    single { GetWeatherClothesUi(get(),get()) }
+    single {GetWeatherDataUi(get(),get()) }
+    single { GetWeatherClothesUi(get(),get(),get()) }
     single {
         MainMenuUi(
            listOf(

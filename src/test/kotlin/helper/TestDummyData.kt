@@ -45,8 +45,18 @@ object TestDummyData {
             )
         )
     //Clothes Ui test
-    val CLOTHES_LIST = listOf(
+    val CLOTHES_SUITABLE_CASUAL = UserClothes(
+        temperature = TemperatureRange(low = 10.0, high = 20.0),
+        outfitStyle = "Casual",
+        top = "T-Shirt",
+        bottom = "Jeans",
+        shoes = "Sneakers",
+        accessories = listOf("Sunglasses")
+    )
+
+    val FILTERED_CLOTHES = listOf(
         UserClothes(
+            temperature = TemperatureRange(low = 10.0, high = 20.0),
             outfitStyle = "Casual",
             top = "T-Shirt",
             bottom = "Jeans",
@@ -54,6 +64,7 @@ object TestDummyData {
             accessories = listOf("Sunglasses")
         ),
         UserClothes(
+            temperature = TemperatureRange(low = 15.0, high = 25.0),
             outfitStyle = "Semi-Casual",
             top = "Sweater",
             bottom = "Chinos",
@@ -62,20 +73,38 @@ object TestDummyData {
         )
     )
 
-    val EMPTY_LIST = emptyList<UserClothes>()
-    val OUTFIT = listOf(
-        UserClothes(
-            outfitStyle = "Casual",
-            top = "T-Shirt",
-            bottom = "Jeans",
-            shoes = "Sneakers",
-            accessories = listOf("Sunglasses")
-        )
+    val CLOTHES_LIST = UserClothes(
+        temperature = TemperatureRange(low = 10.0, high = 20.0),
+        outfitStyle = "Casual",
+        top = "T-Shirt",
+        bottom = "Jeans",
+        shoes = "Sneakers",
+        accessories = listOf("Sunglasses")
     )
+
+    val CLOTHES_LIST_SEMI_CASUAL = UserClothes(
+        temperature = TemperatureRange(low = 15.0, high = 25.0),
+        outfitStyle = "Semi-Casual",
+        top = "Sweater",
+        bottom = "Chinos",
+        shoes = "Boots",
+        accessories = listOf("Scarf")
+    )
+
+    val EMPTY_LIST = emptyList<UserClothes>()
+
+    val OUTFIT = UserClothes(
+        temperature = TemperatureRange(low = 10.0, high = 20.0),
+        outfitStyle = "Casual",
+        top = "T-Shirt",
+        bottom = "Jeans",
+        shoes = "Sneakers",
+        accessories = listOf("Sunglasses")
+    )
+
     val EXPECTED_RESULT = "1 - Casual\n" +
             "\t- Top: T-Shirt\n" +
             "\t- Bottom: Jeans\n" +
             "\t- Shoes: Sneakers\n" +
             "\t- Accessories: Sunglasses"
-    }
-
+}
